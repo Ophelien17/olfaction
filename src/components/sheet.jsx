@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import axios from "axios";
 
 const styles = (theme) => ({
     titleSheet:{
@@ -38,8 +37,6 @@ const styles = (theme) => ({
 
 function Sheet(props) {
     const {classes} = props;
-    const[uneFois, setUnefois]= useState(true);
-    const[nameOlfa, setNameOlfa]= useState("");
     const [donneeLearnOlfa, setDonneeLearnOlfa] = useState({});
 
 
@@ -55,7 +52,6 @@ function Sheet(props) {
         console.log('donneeLearnOlfa');
         console.log(donneeLearnOlfa.type);*/
     });
-
 
     return(
         <>

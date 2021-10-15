@@ -20,7 +20,7 @@ import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import Grid from "@material-ui/core/Grid";
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from "@material-ui/core/TextField/TextField";
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch} from 'react-router-dom';
 
 
 const categories = [

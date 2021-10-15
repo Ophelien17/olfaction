@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import PropTypes from 'prop-types';
-//import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Field from './fields';
 
@@ -51,12 +50,7 @@ function Test(props) {
 
     const handleSubmit = (evt) =>{
         setOlfa(props.olfa);
-        console.log(testOlfa);
-        console.log('yo');
-        evt.preventDefault()
-
-        const str = "Crème Brulée";
-        console.log(str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase());
+        evt.preventDefault();
 
         if (olfa.type === 'natural'){
             var didier = Object.keys(olfa);
@@ -67,23 +61,16 @@ function Test(props) {
             var jack = Object.keys(testOlfa);
             jack = jack.sort();
 
-            console.log(jack)
             for(var i=0; i<didier.length; i++){
                 if (testOlfa[didier[i]] === undefined){
                     document.getElementById(didier[i]).placeholder = 'Le champs est vide !';
-                    console.log("rempli le");
                     document.getElementById(didier[i]).style.color = 'pink';
-                }else if(olfa[didier[i]].toLowerCase() === testOlfa[didier[i]].toLowerCase() || olfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === testOlfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()){
-                    console.log('bg ' + didier[i]);
+                }else if(olfa[didier[i]].toLowerCase() === testOlfa[didier[i]].toLowerCase() || olfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === testOlfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())
                     document.getElementById(didier[i]).style.color = 'green';
-                } else{
-                    console.log('t nul la réponse : '+olfa[didier[i]]);
+                 else{
                     document.getElementById(didier[i]).style.color = 'red';
                 }
             }
-
-
-
         }
     };
 

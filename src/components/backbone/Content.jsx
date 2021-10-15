@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+//import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import Tuile from "../Tuile";
 import Sheet from "../sheet";
@@ -40,7 +40,7 @@ const Content = (props) => {
     //const donne= props.donne;
     const [learnSheet, setLearnSheet] = useState(null);
     const [categori, setCategori] = useState(null);
-    const[uneFois, setUnefois]= useState(true);
+    const[uneFois]= useState(true);
     const [donneeTestOlfa, setDonneeTestOlfa] = useState({});
     const [testOlfa, setTestOlfa] = useState({});
 
@@ -68,13 +68,6 @@ const Content = (props) => {
 
     }, [uneFois, categori]);
 
-
-    const openTuile = (name)=>{
-        if (name === learnSheet){
-            setLearnSheet(null)
-        }else
-            setLearnSheet(name);
-    };
 
     return (
         <>
