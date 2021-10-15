@@ -62,14 +62,13 @@ function Test(props) {
             jack = jack.sort();
 
             for(var i=0; i<didier.length; i++){
-                if (testOlfa[didier[i]] === undefined){
+                if (testOlfa[didier[i]] === undefined)
                     document.getElementById(didier[i]).placeholder = 'Le champs est vide !';
-                    document.getElementById(didier[i]).style.color = 'pink';
-                }else if(olfa[didier[i]].toLowerCase() === testOlfa[didier[i]].toLowerCase() || olfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === testOlfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())
+                else if(olfa[didier[i]].toLowerCase() === testOlfa[didier[i]].toLowerCase() || olfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === testOlfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase())
                     document.getElementById(didier[i]).style.color = 'green';
-                 else{
+                else
                     document.getElementById(didier[i]).style.color = 'red';
-                }
+
             }
         }
     };
