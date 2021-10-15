@@ -10,6 +10,7 @@ const styles = (theme) => ({
     },
     labelSheet: {
         whiteSpace: 'nowrap',
+        width: '100vh',
     },
     styleInputSheet: {
         width: '100%',
@@ -22,7 +23,7 @@ function Fields(props) {
     const {classes} = props;
 
     return(
-        <div className={classes.champsSheet}>
+        <div className={classes.champsSheet} id={props.id}>
             <label className={classes.labelSheet} htmlFor={props.nameValue}>{props.nameField} :
                 <input className={classes.styleInputSheet} autoComplete={'off'} type="text" name={props.nameValue} id={props.nameValue} value={props.val.nameValue} onChange={props.onChange}/>
             </label>

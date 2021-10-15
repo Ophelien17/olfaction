@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 //import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
@@ -39,6 +39,8 @@ function Test(props) {
     const [testOlfa, setTestOlfa] = useState({});
     const [olfa, setOlfa] = useState({});
 
+
+
     const handleChange = (evt) =>{
         const value = evt.target.value;
         setTestOlfa({
@@ -52,100 +54,32 @@ function Test(props) {
         console.log(testOlfa);
         console.log('yo');
         evt.preventDefault()
+
+        const str = "Crème Brulée";
+        console.log(str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase());
+
         if (olfa.type === 'natural'){
-         /*   if(olfa.name === testOlfa.name){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.name);
-
-            if(olfa.botanic_name === testOlfa.botanic_name){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.botanic_name);
-
-            if(olfa.english_name === testOlfa.english_name){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.english_name);
-
-            if(olfa.region === testOlfa.region){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.region);
-
-            if(olfa.part_plante === testOlfa.part_plante){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.part_plante);
-
-            if(olfa.extraction_mode === testOlfa.extraction_mode){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.extraction_mode);
-
-            if(olfa.aspect === testOlfa.aspect){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.aspect);
-
-            if(olfa.main_constituents === testOlfa.main_constituents){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.main_constituents);
-
-            if(olfa.olfactory_family === testOlfa.olfactory_family){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.olfactory_family);
-
-            if(olfa.descriptors === testOlfa.descriptors){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.descriptors);
-
-            if(olfa.tenacity === testOlfa.tenacity){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.tenacity);
-
-            if(olfa.regulations === testOlfa.regulations){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.regulations);
-
-            if(olfa.average_price === testOlfa.average_price){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.average_price);
-
-            if(olfa.jobs === testOlfa.jobs){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.jobs);
-
-            if(olfa.iconic_perfume === testOlfa.iconic_perfume){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.iconic_perfume);
-
-            if(olfa.rq === testOlfa.rq){
-                console.log('bg du con')
-            }else
-                console.log('t con '+olfa.rq);*/
-console.log(olfa)
-
             var didier = Object.keys(olfa);
-            didier = didier.shift();
-            console.log(didier)
-           // didier = didier.sort();
-            console.log(didier)
+            didier.shift();
+            didier.shift();
+            didier = didier.sort();
 
             var jack = Object.keys(testOlfa);
             jack = jack.sort();
+
             console.log(jack)
             for(var i=0; i<didier.length; i++){
-                //console.log(didier[1])
-                console.log(jack[i])
+                if (testOlfa[didier[i]] === undefined){
+                    document.getElementById(didier[i]).placeholder = 'Le champs est vide !';
+                    console.log("rempli le");
+                    document.getElementById(didier[i]).style.color = 'pink';
+                }else if(olfa[didier[i]].toLowerCase() === testOlfa[didier[i]].toLowerCase() || olfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() === testOlfa[didier[i]].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()){
+                    console.log('bg ' + didier[i]);
+                    document.getElementById(didier[i]).style.color = 'green';
+                } else{
+                    console.log('t nul la réponse : '+olfa[didier[i]]);
+                    document.getElementById(didier[i]).style.color = 'red';
+                }
             }
 
 
@@ -158,24 +92,23 @@ console.log(olfa)
             <h2 className={classes.titleSheet}>{olfa.name === null ? 'Nom matière' : props.olfa.name}</h2>
             <div className={classes.sheet}>
                 <form onSubmit={handleSubmit}>
-                    {console.log(props)}
 
                         <Field nameField={'Nom'} val={testOlfa} onChange={handleChange} nameValue={'name'}/>
-                        <Field nameField={'Nom botanique'} val={testOlfa} onChange={handleChange} nameValue={'botanic_name'}/>
-                        <Field nameField={'Nom anglais'} nameValue={'english_name'} val={testOlfa} onChange={handleChange}/>
-                        <Field nameField={'Région'} val={testOlfa} onChange={handleChange} nameValue={'region'}/>
-                        <Field nameField={'Partie de la plante'} val={testOlfa} onChange={handleChange} nameValue={'part_plante'}/>
-                        <Field nameField={'Mode d\'extraction'} val={testOlfa} onChange={handleChange} nameValue={'extraction_mode'}/>
-                        <Field nameField={'Aspect'} val={testOlfa} onChange={handleChange} nameValue={'aspect'}/>
-                        <Field nameField={'Principaux constituents'} val={testOlfa} onChange={handleChange} nameValue={'main_constituents'}/>
-                        <Field nameField={'Famille olfactive'} val={testOlfa} onChange={handleChange} nameValue={'olfactory_family'}/>
-                        <Field nameField={'descripteurs'} val={testOlfa} onChange={handleChange} nameValue={'descriptors'}/>
-                        <Field nameField={'Ténacité'} val={testOlfa} onChange={handleChange} nameValue={'tenacity'}/>
-                        <Field nameField={'Régulation'} val={testOlfa} onChange={handleChange} nameValue={'regulations'}/>
-                        <Field nameField={'Prix moyen'} val={testOlfa} onChange={handleChange} nameValue={'average_price'}/>
-                        <Field nameField={'Emplois'} val={testOlfa} onChange={handleChange} nameValue={'jobs'}/>
-                        <Field nameField={'Parfums emblématuques'} val={testOlfa} onChange={handleChange} nameValue={'iconic_perfume'}/>
-                        <Field nameField={'Remaque'} val={testOlfa} onChange={handleChange} nameValue={'rq'}/>
+                        <Field nameField={'Nom botanique'} val={testOlfa} onChange={handleChange}  nameValue={'botanic_name'}/>
+                        <Field nameField={'Nom anglais'} nameValue={'english_name'} val={testOlfa}  onChange={handleChange}/>
+                        <Field nameField={'Région'} val={testOlfa} onChange={handleChange}  nameValue={'region'}/>
+                        <Field nameField={'Partie de la plante'} val={testOlfa} onChange={handleChange}  nameValue={'part_plante'}/>
+                        <Field nameField={'Mode d\'extraction'} val={testOlfa} onChange={handleChange}  nameValue={'extraction_mode'}/>
+                        <Field nameField={'Aspect'} val={testOlfa} onChange={handleChange}  nameValue={'aspect'}/>
+                        <Field nameField={'Principaux constituents'} val={testOlfa} onChange={handleChange}  nameValue={'main_constituents'}/>
+                        <Field nameField={'Famille olfactive'} val={testOlfa} onChange={handleChange}  nameValue={'olfactory_family'}/>
+                        <Field nameField={'descripteurs'} val={testOlfa} onChange={handleChange}  nameValue={'descriptors'}/>
+                        <Field nameField={'Ténacité'} val={testOlfa} onChange={handleChange}  nameValue={'tenacity'}/>
+                        <Field nameField={'Régulation'} val={testOlfa} onChange={handleChange}  nameValue={'regulations'}/>
+                        <Field nameField={'Prix moyen'} val={testOlfa} onChange={handleChange}  nameValue={'average_price'}/>
+                        <Field nameField={'Emplois'} val={testOlfa} onChange={handleChange}  nameValue={'jobs'}/>
+                        <Field nameField={'Parfums emblématuques'} val={testOlfa} onChange={handleChange}  nameValue={'iconic_perfume'}/>
+                        <Field nameField={'Remaque'} val={testOlfa} onChange={handleChange}  nameValue={'rq'}/>
 
 
                 <div className={classes.placeButtonSheet}>
