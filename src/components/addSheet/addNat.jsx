@@ -72,9 +72,9 @@ const AddNat = (props) => {
 
     return (
         <>
-            <h2>Nouvelle fiche Naturelle <img
-                title={'Attention : pour les champs : "région", "Principaux constituents", "descripteurs" et "Parfums emblématuques" merci de separer chaque entité par une virgule. Pour le champs "prix", le sigle euro ne doit pas etre incrit'}
-                src={'icons/interrogation.svg'} height={20}/>
+            <h2>Nouvelle fiche Naturelle <img alt={'intérogation'}
+                                              title={'Attention : pour les champs : "région", "Principaux constituents", "descripteurs" et "Parfums emblématuques" merci de separer chaque entité par une virgule. Pour le champs "prix", le sigle euro ne doit pas etre incrit'}
+                                              src={'icons/interrogation.svg'} height={20}/>
             </h2>
 
             <form onSubmit={handleSubmit}>

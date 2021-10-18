@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import {withStyles} from "@material-ui/core";
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 import AddNat from './addNat';
 import AddSyn from './addSyn';
@@ -8,26 +8,18 @@ import AddPer from './addPer';
 
 const styles = (theme) => ({});
 
-const AddSheet = (props) => {
-    const {classes} = props;
-    const [newOlfa, setNewOlfa] = useState({});
-    const [newOlfaType, setNewOlfaType] = useState('natural');
+const AddSheet = () => {
+    const [newOlfaType, setNewOlfaType] = useState('');
 
 
     const handleTypeChange = (evt) => {
         const value = evt.target.value;
         setNewOlfaType({
-            ...newOlfa,
+            ...newOlfaType,
             [evt.target.name]: value
         });
     };
 
-
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-
-
-    };
 
 
     return (<>
