@@ -1,5 +1,5 @@
 import React from "react";
-import {withStyles} from "@material-ui/core";
+import {Grid, withStyles} from "@material-ui/core";
 import PropTypes from 'prop-types';
 
 
@@ -7,10 +7,6 @@ const styles = (theme) => ({
     champsSheet: {
         margin: '20px 40px',
         display: 'flex',
-    },
-    labelSheet: {
-        whiteSpace: 'nowrap',
-        width: '100vh',
     },
     styleInputSheet: {
         width: '100%',
@@ -24,9 +20,15 @@ function Fields(props) {
 
     return(
         <div className={classes.champsSheet} id={props.id}>
-            <label className={classes.labelSheet} htmlFor={props.nameValue}>{props.nameField} :
-                <input className={classes.styleInputSheet} autoComplete={'off'} type="text" name={props.nameValue} id={props.nameValue} value={props.val.nameValue} onChange={props.onChange}/>
-            </label>
+            <Grid container>
+                <Grid item xs={12}>
+                    <label htmlFor={props.nameValue}>{props.nameField} :</label>
+                </Grid>
+                <Grid item xs={12}>
+                    <input className={classes.styleInputSheet} autoComplete={'off'} type="text" name={props.nameValue}
+                           id={props.nameValue} value={props.val.nameValue} onChange={props.onChange}/>
+                </Grid>
+            </Grid>
         </div>
     )
 };

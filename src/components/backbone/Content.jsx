@@ -8,6 +8,7 @@ import axios from "axios";
 import Tuile from "../Tuile";
 import Sheet from "../sheet";
 import Test from "../test";
+import AddSheet from '../addSheet/addSheet';
 
 
 const styles = (theme) => ({
@@ -135,10 +136,14 @@ const Content = (props) => {
 
             </Grid>
 
+            <Grid>
+                <AddSheet/>
+            </Grid>
+
 
             </>
     );
-}
+};
 
 Content.propTypes = {
     classes: PropTypes.object.isRequired,
