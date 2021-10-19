@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
+import '../lol.css'
 
 const styles = (theme) => ({
     tuiles: {
@@ -9,12 +10,14 @@ const styles = (theme) => ({
         borderRadius: 20,
         backgroundColor: '#FFF',
         cursor: 'pointer',
+        height: '100%',
     },
-    imgTuile:{
+
+    imgTuile: {
         borderRadius: '20px 20px 0 0',
         display: 'inline-block',
     },
-    txtTuile:{
+    txtTuile: {
         borderRadius: '0 0 20px 20px',
         height: 50,
         backgroundColor: 'black',
@@ -27,7 +30,7 @@ const styles = (theme) => ({
         textTransform: 'uppercase',
         margin: 0,
     },
-    subtitleTuile:{
+    subtitleTuile: {
         margin: 0,
     },
 
@@ -35,29 +38,44 @@ const styles = (theme) => ({
 
 function Tuile(props) {
     const {classes} = props;
+    const [desc, setDesc] = useState();
     const infoOlfa = props.eachOlfa;
-   // const[descriptors, setDescriptors]=useState([]);
 
     useEffect(()=>{
-     //   setDescriptors(infoOlfa.descriptors);
-    })
+        if (infoOlfa.descriptors !== undefined)
+            setDesc(infoOlfa.descriptors);
+    }, [infoOlfa, desc !== undefined]);
 
 
-    return(
+    return (
         <>
 
-        <Grid item xs={12} sm={6} md={4} xl={2} onClick={props.onClick}>
+            <Grid item xs={12} sm={6} md={4} xl={2} onClick={props.onClick}>
 
-                    <div className={classes.tuiles} title={'Fiche '+infoOlfa.name}>
-                        <img src={'logo192.png'} alt={''} className={classes.imgTuile}/>
-                        <div className={classes.txtTuile}>
-                            <h4 className={classes.titleTuile}>{infoOlfa.name}</h4>
-                            <h6 className={classes.subtitleTuile}>{infoOlfa.olfactory_family}</h6>
+                <div title={'Fiche ' + infoOlfa.name}>
+
+
+                    <div className="flip-card">
+                        <div className="flip-card-inner">
+                            <div className={"flip-card-front"} title={'Fiche ' + infoOlfa.name}>
+                                <div>
+                                    <img src={'logo192.png'} alt={''} className='imgTuile'
+                                    />
+                                    <h4 className='titleTuile'>{infoOlfa.name}</h4>
+                                </div>
+                            </div>
+                            <div className="flip-card-back">
+                                <h1>{infoOlfa.name}</h1>
+                                <h4 className='subtitleTuile'>{infoOlfa.olfactory_family}</h4>
+                                <h4>descripteurs : {desc !== undefined ? desc.map((d) => (d + ' ')) :
+                                    <p>vide</p>}</h4>
+                            </div>
                         </div>
                     </div>
-        </Grid>
+                </div>
+            </Grid>
 
-</>
+        </>
     );
 }
 

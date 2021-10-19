@@ -51,21 +51,6 @@ function Sheet(props) {
     useEffect(()=>{
         if (donneeLearnOlfa.descriptors !== undefined)
             setDesc(donneeLearnOlfa.descriptors);
-        /* var descTMP = [];
-         if(donneeLearnOlfa.descriptors !== undefined){
-             var descriptor = donneeLearnOlfa.descriptors.split(',');
-             descriptor.map((d) => {
-                 if (d.substr(0, 1) !== " ")
-                     descTMP.push(d);
-                 else if (d.substr(0, 1) === " ")
-                     descTMP.push(d.slice(1));
-
-             });
-             setDesc(descTMP);
-         }
-         console.log('desc')
-         console.log(desc)*/
-
     }, [donneeLearnOlfa, desc !== undefined]);
 
     useEffect(() => {
