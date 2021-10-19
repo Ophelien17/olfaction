@@ -27,6 +27,7 @@ const styles = (theme) => ({
 const AddNat = (props) => {
     const {classes} = props;
     const [addNatural, setAddNatural] = useState();
+    const [image, setImage] = useState();
 
 
     const handleChange = (evt) => {
@@ -36,6 +37,17 @@ const AddNat = (props) => {
             [evt.target.name]: value,
             'type': props.type,
         });
+    };
+
+    const handleChangeImg = (evt) => {
+        const file = evt.target;
+        var files = file.files;
+        console.log(files);
+        var fr = new FileReader()
+        fr.onload = function () {
+            document.getElementById('outImage').src = fr.result;
+        }
+        fr.readAsDataURL(files[0]);
     };
 
     const handleSubmit = (evt) => {
@@ -49,7 +61,7 @@ const AddNat = (props) => {
 
         axios.post('http://localhost:8080/newSheet', {
             addNatural
-        }, {params: {typeOfSheet: 'addNatural'}} /* <-- this guy*/,).then(function (response) {
+        }, {params: {typeOfSheet: 'addNatural'}},).then(function (response) {
             console.log(response);
         });
     };
@@ -105,7 +117,14 @@ const AddNat = (props) => {
                        nameValue={'iconic_perfume'}/>
                 <Field nameField={'Remaque'} val={""} onChange={handleChange} nameValue={'rq'}/>
 
+                /* <label htmlFor="imgMaterial">Choisir une photo d'illustratin de la matière (.jpg) : </label>
+
+                 <input type="file"
+                        id="imgMaterial" name="imgMaterial"
+                        accept=".jpg" onChange={handleChangeImg}/>*/
+
                 <input className={classes.buttonSheet} type={'submit'} value={'Nouvelle fiche'}/>
+                <img id={'outImage'}/>
             </form>
 
 

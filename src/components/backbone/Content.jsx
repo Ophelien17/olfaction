@@ -79,7 +79,13 @@ const Content = (props) => {
                   className={classes.bubble}>
 
                 <Grid item xs={4}>
-                    <div className={classes.outerBubble} onClick={()=>{setCategori("natural")}}>
+                    <div className={classes.outerBubble} onClick={() => {
+                        if (categori === null) {
+                            setCategori("natural")
+                        } else {
+                            setCategori(null)
+                        }
+                    }}>
                         <div title={'matière naturelles'} className={classes.bubbleChoice}>
                             <img src="icons/natural.svg" alt="" className={classes.iconChoice}/>
                         </div>
@@ -88,7 +94,13 @@ const Content = (props) => {
                 </Grid>
 
                 <Grid item xs={4}>
-                    <div className={classes.outerBubble} onClick={()=>{setCategori("synthetic")}}>
+                    <div className={classes.outerBubble} onClick={() => {
+                        if (categori === null) {
+                            setCategori("synthetic")
+                        } else {
+                            setCategori(null)
+                        }
+                    }}>
                         <div title={'matière synthetiques'} className={classes.bubbleChoice}>
                             <img src="icons/synthetic.svg" alt="" className={classes.iconChoice}/>
                         </div>
@@ -96,7 +108,13 @@ const Content = (props) => {
 
                 </Grid>
                 <Grid item xs={4}>
-                    <div className={classes.outerBubble} onClick={()=>{setCategori("perfume")}}>
+                    <div className={classes.outerBubble} onClick={() => {
+                        if (categori === null) {
+                            setCategori("perfume")
+                        } else {
+                            setCategori(null)
+                        }
+                    }}>
                         <div title={'Parfums'} className={classes.bubbleChoice}>
                             <img src="icons/perfume.svg" alt="" className={classes.iconChoice}/>
                         </div>
