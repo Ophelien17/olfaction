@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { createTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
+import {createTheme, ThemeProvider, withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +8,10 @@ import Link from '@material-ui/core/Link';
 import Navigator from './Navigator';
 import Content from './Content';
 import Header from './Header';
+import {
+    BrowserRouter as Router,
+} from "react-router-dom";
+
 
 function Copyright() {
     return (
@@ -164,7 +168,7 @@ const styles = {
 };
 
 function Paperbase(props) {
-    const { classes } = props;
+    const {classes} = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
@@ -172,31 +176,32 @@ function Paperbase(props) {
     };
 
 
-
     return (
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
-                <CssBaseline />
+                <CssBaseline/>
                 <nav className={classes.drawer}>
                     <Hidden smUp implementation="js">
                         <Navigator
-                            PaperProps={{ style: { width: drawerWidth } }}
+                            PaperProps={{style: {width: drawerWidth}}}
                             variant="temporary"
                             open={mobileOpen}
                             onClose={handleDrawerToggle}
                         />
                     </Hidden>
                     <Hidden smDown implementation="css">
-                        <Navigator PaperProps={{ style: { width: drawerWidth } }} />
+                        <Navigator PaperProps={{style: {width: drawerWidth}}}/>
                     </Hidden>
                 </nav>
                 <div className={classes.app}>
-                    <Header onDrawerToggle={handleDrawerToggle} />
+                    <Header onDrawerToggle={handleDrawerToggle}/>
                     <main className={classes.main}>
-                        <Content/>
+                        <Router>
+                            <Content/>
+                        </Router>
                     </main>
                     <footer className={classes.footer}>
-                        <Copyright />
+                        <Copyright/>
                     </footer>
                 </div>
             </div>

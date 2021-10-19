@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import axios from "axios";
-//import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useHistory,
+    useLocation,
+    useParams
+} from "react-router-dom";
 
 import Tuile from "../Tuile";
 import Sheet from "../sheet";
@@ -44,6 +52,9 @@ const Content = (props) => {
     const[uneFois]= useState(true);
     const [donneeTestOlfa, setDonneeTestOlfa] = useState({});
     const [testOlfa, setTestOlfa] = useState({});
+
+    let location = useLocation();
+    let background = location.state && location.state.background;
 
     useEffect(()=>{
 
@@ -124,25 +135,24 @@ const Content = (props) => {
             </Grid>
             <Grid container spacing={2}>
 
+
                 {
                     Object.entries(donneeTestOlfa).map((olfa)=>{
                         return(
-                                <Tuile eachOlfa={olfa[1]} onClick={()=>{if(olfa[1]===learnSheet){setLearnSheet(null)} else{ setLearnSheet(olfa[1])}}}/>
+                            <Switch location={background || location}>
+                                <Route exact path={'/'} children={<Tuile eachOlfa={olfa[1]} onClick={() => {
+                                    if (olfa[1] === learnSheet) {
+                                        setLearnSheet(null)
+                                    } else {
+                                        setLearnSheet(olfa[1])
+                                    }
+                                }}/>}/>
+                                <Route path={'/sheet/' + olfa[1].name} children={<Sheet name={learnSheet}/>}/>
+                            </Switch>
                             )
                     })
                 }
-
             </Grid>
-
-            <Grid style={learnSheet !== null ? {display: 'inline'} : {display: 'none'}}>
-                {
-                    learnSheet !== null ?
-                        <Sheet name={learnSheet} onClick={()=>(setTestOlfa(learnSheet))}/> :
-                        <p></p>
-
-                }
-            </Grid>
-
 
             <Grid>
                 {
