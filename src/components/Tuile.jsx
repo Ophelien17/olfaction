@@ -5,12 +5,21 @@ import '../return.css'
 
 function Tuile(props) {
     const [desc, setDesc] = useState();
+    const [colorCard, setColorCard] = useState('white');
     const infoOlfa = props.eachOlfa;
 
     useEffect(()=>{
         if (infoOlfa.descriptors !== undefined)
             setDesc(infoOlfa.descriptors);
+
+        if (infoOlfa.type === 'natural')
+            setColorCard('#96d996');
+        else if (infoOlfa.type === 'synthetic')
+            setColorCard('#cfe7fa');
+        else if (infoOlfa.type === 'perfume')
+            setColorCard('#FF54F6');
     }, [infoOlfa, desc !== undefined]);
+
 
 
     return (
@@ -23,14 +32,16 @@ function Tuile(props) {
 
                     <div className="flip-card">
                         <div className="flip-card-inner">
-                            <div className={"flip-card-front"} title={'Fiche ' + infoOlfa.name}>
+                            <div className={"flip-card-front"} style={{backgroundColor: colorCard}}
+                                 title={'Fiche ' + infoOlfa.name}>
                                 <div>
-                                    <img src={'logo192.png'} alt={''} className='imgTuile'
-                                    />
+                                    <img src={'imgMaterial/' + infoOlfa.name + '.jpg'} alt={'image de ' + infoOlfa.name}
+                                         className='imgTuile'
+                                         style={{height: 200}}/>
                                     <h4 className='titleTuile'>{infoOlfa.name}</h4>
                                 </div>
                             </div>
-                            <div className="flip-card-back">
+                            <div className="flip-card-back" style={{backgroundColor: colorCard}}>
                                 <h1>{infoOlfa.name}</h1>
                                 <h4 className='subtitleTuile'>{infoOlfa.olfactory_family}</h4>
                                 <h4>descripteurs : {desc !== undefined ? desc.map((d) => (d + ' ')) :
