@@ -5,21 +5,20 @@ import Field from './fields';
 
 
 const styles = (theme) => ({
-    titleSheet:{
+    titleTest: {
         textTransform: 'uppercase',
     },
-    sheet: {
+    test: {
         backgroundColor: '#FFF',
         borderRadius: 20,
-        margin: '20px 0',
         padding: 10,
     },
 
-    placeButtonSheet:{
+    placeButtonTest: {
         display: 'flex',
         flexDirection: 'row-reverse',
     },
-    buttonSheet: {
+    buttonTest: {
         border: 'none',
         margin: '10px 40px',
         padding: 10,
@@ -75,8 +74,8 @@ function Test(props) {
 
     return(
         <>
-            <h2 className={classes.titleSheet}>{olfa.name === null ? 'Nom matière' : props.olfa.name}</h2>
-            <div className={classes.sheet}>
+            <h2 className={classes.titleTest}>{olfa.name === null ? 'Nom matière' : props.olfa.name}</h2>
+            <div className={classes.test}>
                 <form onSubmit={handleSubmit}>
 
                         <Field nameField={'Nom'} val={testOlfa} onChange={handleChange} nameValue={'name'}/>
@@ -97,8 +96,8 @@ function Test(props) {
                         <Field nameField={'Remaque'} val={testOlfa} onChange={handleChange}  nameValue={'rq'}/>
 
 
-                <div className={classes.placeButtonSheet}>
-                    <input className={classes.buttonSheet} type={'submit'} value={'Envoyer'}/>
+                    <div className={classes.placeButtonTest}>
+                        <input className={classes.button} type={'submit'} value={'Envoyer'}/>
                 </div>
                 </form>
 

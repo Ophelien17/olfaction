@@ -30,27 +30,7 @@ function Header(props) {
             <AppBar color="primary" position="sticky" elevation={0}>
                 <Toolbar>
                     <Grid container spacing={1} justifyContent="center" alignItems="center">
-                        <Hidden mdUp>
-                            <Grid item>
-                                <IconButton
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    onClick={onDrawerToggle}
-                                    className={classes.menuButton}
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                            </Grid>
-                        </Hidden>
-                        <Grid item>
-                            <Tooltip title="Alerts • No alerts">
-                                <IconButton color="inherit">
-                                    <NotificationsIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </Grid>
-                        <Grid item>
-
+                        <Grid>
                             Une femme sans parfum est une femme sans avenir
                         </Grid>
 

@@ -11,6 +11,7 @@ import Header from './Header';
 import {
     BrowserRouter as Router,
 } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 
 
 function Copyright() {
@@ -18,7 +19,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
+                Olfaction
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -165,11 +166,29 @@ const styles = {
         padding: theme.spacing(2),
         background: '#eaeff1',
     },
+    bubble: {
+        marginBottom: 20,
+    },
+    outerBubble: {
+        textAlign: 'center',
+    },
+    bubbleChoice: {
+        backgroundColor: '#CFE8FA',
+        display: 'inline-block',
+        padding: '20px',
+        borderRadius: '50%',
+        cursor: 'pointer',
+    },
+
+    iconChoice: {
+        height: '30px',
+    },
 };
 
 function Paperbase(props) {
     const {classes} = props;
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [section, setSection] = useState(null);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -187,18 +206,39 @@ function Paperbase(props) {
                             variant="temporary"
                             open={mobileOpen}
                             onClose={handleDrawerToggle}
+                            onUpdate={(valeur) => {
+                                if (section === valeur) {
+                                    console.log('bg')
+                                }
+                                if (section === null || section === valeur) {
+                                    setSection(valeur);
+                                } else {
+                                    setSection(null);
+                                }
+                            }
+                            }
                         />
                     </Hidden>
                     <Hidden smDown implementation="css">
-                        <Navigator PaperProps={{style: {width: drawerWidth}}}/>
+                        <Navigator PaperProps={{style: {width: drawerWidth}}} onUpdate={(valeur) => {
+                            console.log(section)
+                            console.log(valeur)
+                            if (section != valeur) {
+                                console.log('bg')
+                            }
+                            if (section === null) {
+                                setSection(valeur);
+                            } else {
+                                setSection(null);
+                            }
+                        }
+                        }/>
                     </Hidden>
                 </nav>
                 <div className={classes.app}>
                     <Header onDrawerToggle={handleDrawerToggle}/>
                     <main className={classes.main}>
-                        <Router>
-                            <Content/>
-                        </Router>
+                        <Content section={section}/>
                     </main>
                     <footer className={classes.footer}>
                         <Copyright/>
@@ -207,6 +247,7 @@ function Paperbase(props) {
             </div>
         </ThemeProvider>
     );
+
 }
 
 Paperbase.propTypes = {
