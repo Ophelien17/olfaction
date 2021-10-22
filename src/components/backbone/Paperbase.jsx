@@ -8,10 +8,6 @@ import Link from '@material-ui/core/Link';
 import Navigator from './Navigator';
 import Content from './Content';
 import Header from './Header';
-import {
-    BrowserRouter as Router,
-} from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
 
 
 function Copyright() {
@@ -190,6 +186,7 @@ function Paperbase(props) {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [section, setSection] = useState(null);
 
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -207,30 +204,44 @@ function Paperbase(props) {
                             open={mobileOpen}
                             onClose={handleDrawerToggle}
                             onUpdate={(valeur) => {
-                                if (section === valeur) {
-                                    console.log('bg')
-                                }
-                                if (section === null || section === valeur) {
+
                                     setSection(valeur);
-                                } else {
-                                    setSection(null);
-                                }
+
                             }
                             }
                         />
                     </Hidden>
                     <Hidden smDown implementation="css">
                         <Navigator PaperProps={{style: {width: drawerWidth}}} onUpdate={(valeur) => {
-                            console.log(section)
+                            //console.log(section)
                             console.log(valeur)
-                            if (section != valeur) {
-                                console.log('bg')
-                            }
-                            if (section === null) {
-                                setSection(valeur);
-                            } else {
-                                setSection(null);
-                            }
+                            /*  if (section != valeur) {
+                                  console.log('bg')
+                              }
+                              if (section === null) {
+                                  setSection(valeur);
+                              } else {
+                                  setSection(null);
+                              }
+                              if (valeur !== null) {
+                                  if (valeur[0] === 'menu') {
+                                      setNav(valeur[0]);
+                                  } else if (valeur[0] === 'material') {
+                                          setSection(valeur)
+                                  } else if (valeur[0] === 'materialName') {
+                                      setNav(valeur[1]);
+                                      setLearnSheet(valeur[1])
+                                  } else if (valeur[0] === 'setting') {
+                                      setNav(valeur[1]);
+                                  } else {
+                                      setNav('');
+                                  }
+                              } else {
+                                  setCategori(null);
+                                  setLearnSheet(null);
+                                  setSection(null)
+                              }*/
+                            setSection(valeur)
                         }
                         }/>
                     </Hidden>

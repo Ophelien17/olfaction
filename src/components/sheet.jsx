@@ -54,19 +54,6 @@ function Sheet(props) {
     }, [donneeLearnOlfa, desc !== undefined]);
 
     useEffect(() => {
-        /* var regTMP = [];
-         if(donneeLearnOlfa.region !== undefined){
-             var reg = donneeLearnOlfa.region.split(',');
-             reg.map((r) => {
-                 if (r.substr(0, 1) !== " ")
-                     regTMP.push(r);
-                 else if (r.substr(0, 1) === " ")
-                     regTMP.push(r.slice(1));
-
-             });
-             setRegion(regTMP);
-         }*/
-
         if (donneeLearnOlfa.region !== undefined)
             setRegion(donneeLearnOlfa.region);
     }, [donneeLearnOlfa, region !== undefined]);

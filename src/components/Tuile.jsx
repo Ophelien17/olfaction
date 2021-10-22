@@ -1,15 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import '../return.css'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useHistory,
-    useLocation,
-    useParams
-} from "react-router-dom";
 
 function Tuile(props) {
     const [desc, setDesc] = useState();
