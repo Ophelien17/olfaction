@@ -41,7 +41,7 @@ function Header(props) {
                             </Grid>
                         </Hidden>
                         <Grid>
-                            Une femme sans parfum est une femme sans avenir
+                            "Une femme sans parfum est une femme sans avenir" <i>Coco Chanel</i>
                         </Grid>
 
                     </Grid>

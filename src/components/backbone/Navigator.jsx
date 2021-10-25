@@ -14,7 +14,6 @@ import TextField from "@material-ui/core/TextField/TextField";
 import axios from "axios";
 
 import _ from 'lodash'
-import faker from 'faker'
 import {Search, Grid, Header, Segment, Label} from 'semantic-ui-react'
 
 const test = {
@@ -251,7 +250,7 @@ function Navigator(props) {
                           onClick={() => {
                               props.onUpdate(['menu'])
                           }}>
-                    Menu
+                    Olfaction
                 </ListItem>
 
                 <ListItem className={clsx(classes.item, classes.itemCategory)}>
@@ -408,22 +407,6 @@ function Navigator(props) {
                         }}
                     >
                         Ajouter une fiche
-                    </ListItemText>
-                </ListItem>
-                <ListItem
-                    key={'Déconnexion'}
-                    button
-                    className={clsx(classes.item)}
-                    onClick={() => {
-                        props.onUpdate(['settings', 'deconnexion'])
-                    }}
-                >
-                    <ListItemText
-                        classes={{
-                            primary: classes.itemPrimary,
-                        }}
-                    >
-                        Déconnexion
                     </ListItemText>
                 </ListItem>
                 <Divider className={classes.divider}/>

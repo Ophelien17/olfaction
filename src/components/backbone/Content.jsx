@@ -131,14 +131,14 @@ const Content = (props) => {
 
 
                             <Grid item xs={4}>
-                                <div className={classes.outerBubble} onClick={() => {
-                                    if (categori === null || categori !== "natural") {
-                                        setCategori("natural")
-                                    } else {
-                                        setCategori(null)
-                                    }
-                                }}>
-                                    <div title={'matière naturelles'} className={classes.bubbleChoice}>
+                                <div className={classes.outerBubble}>
+                                    <div title={'matière naturelles'} className={classes.bubbleChoice} onClick={() => {
+                                        if (categori === null || categori !== "natural") {
+                                            setCategori("natural")
+                                        } else {
+                                            setCategori(null)
+                                        }
+                                    }}>
                                         <img src="icons/natural.svg" alt="" className={classes.iconChoice}/>
                                     </div>
                                 </div>
@@ -146,28 +146,29 @@ const Content = (props) => {
                             </Grid>
 
                             <Grid item xs={4}>
-                                <div className={classes.outerBubble} onClick={() => {
-                                    if (categori === null || categori !== "synthetic") {
-                                        setCategori("synthetic")
-                                    } else {
-                                        setCategori(null)
-                                    }
-                                }}>
-                                    <div title={'matière synthetiques'} className={classes.bubbleChoice}>
+                                <div className={classes.outerBubble}>
+                                    <div title={'matière synthetiques'} className={classes.bubbleChoice}
+                                         onClick={() => {
+                                             if (categori === null || categori !== "synthetic") {
+                                                 setCategori("synthetic")
+                                             } else {
+                                                 setCategori(null)
+                                             }
+                                         }}>
                                         <img src="icons/synthetic.svg" alt="" className={classes.iconChoice}/>
                                     </div>
                                 </div>
 
                             </Grid>
                             <Grid item xs={4}>
-                                <div className={classes.outerBubble} onClick={() => {
-                                    if (categori === null || categori !== "perfume") {
-                                        setCategori("perfume")
-                                    } else {
-                                        setCategori(null)
-                                    }
-                                }}>
-                                    <div title={'Parfums'} className={classes.bubbleChoice}>
+                                <div className={classes.outerBubble}>
+                                    <div title={'Parfums'} className={classes.bubbleChoice} onClick={() => {
+                                        if (categori === null || categori !== "perfume") {
+                                            setCategori("perfume")
+                                        } else {
+                                            setCategori(null)
+                                        }
+                                    }}>
                                         <img src="icons/perfume.svg" alt="" className={classes.iconChoice}/>
                                     </div>
                                 </div>
@@ -237,7 +238,6 @@ const Content = (props) => {
                     </Grid>
 
             }
-
 
 
         </>
