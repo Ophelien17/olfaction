@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Component} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {withStyles} from '@material-ui/core/styles';
@@ -8,12 +8,87 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Grid from "@material-ui/core/Grid";
+import Grid1 from "@material-ui/core/Grid";
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from "@material-ui/core/TextField/TextField";
-import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import axios from "axios";
 
+import _ from 'lodash'
+import faker from 'faker'
+import {Search, Grid, Header, Segment, Label} from 'semantic-ui-react'
+
+const test = {
+    "panel": {
+        "name": "panel",
+        "results": [
+            {
+                "title": "Williamson Group",
+                "description": "Ameliorated neutral help-desk",
+                "image": "https://cdn.fakercloud.com/avatars/orkuncaylar_128.jpg",
+                "price": "$42.75"
+            },
+            {
+                "title": "Pacocha, Morissette and Runte",
+                "description": "Horizontal encompassing matrix",
+                "image": "https://cdn.fakercloud.com/avatars/kohette_128.jpg",
+                "price": "$33.45"
+            },
+            {
+                "title": "Luettgen and Sons",
+                "description": "Upgradable tangible matrices",
+                "image": "https://cdn.fakercloud.com/avatars/sunlandictwin_128.jpg",
+                "price": "$98.92"
+            },
+            {
+                "title": "Gottlieb - Casper",
+                "description": "Total 3rd generation monitoring",
+                "image": "https://cdn.fakercloud.com/avatars/samihah_128.jpg",
+                "price": "$85.06"
+            },
+            {
+                "title": "Goyette, Bednar and Powlowski",
+                "description": "Fully-configurable system-worthy service-desk",
+                "image": "https://cdn.fakercloud.com/avatars/psaikali_128.jpg",
+                "price": "$39.23"
+            }
+        ]
+    },
+    "feed": {
+        "name": "feed",
+        "results": [
+            {
+                "title": "Murazik - Schroeder",
+                "description": "Re-contextualized mission-critical workforce",
+                "image": "https://cdn.fakercloud.com/avatars/superoutman_128.jpg",
+                "price": "$3.05"
+            },
+            {
+                "title": "Koch LLC",
+                "description": "Stand-alone actuating encoding",
+                "image": "https://cdn.fakercloud.com/avatars/balintorosz_128.jpg",
+                "price": "$3.32"
+            },
+            {
+                "title": "Conn - Cole",
+                "description": "Sharable fresh-thinking policy",
+                "image": "https://cdn.fakercloud.com/avatars/chadengle_128.jpg",
+                "price": "$60.52"
+            },
+            {
+                "title": "Rutherford, O'Kon and Ryan",
+                "description": "Programmable context-sensitive software",
+                "image": "https://cdn.fakercloud.com/avatars/thierrymeier__128.jpg",
+                "price": "$24.48"
+            },
+            {
+                "title": "Harber and Sons",
+                "description": "Customizable logistical matrices",
+                "image": "https://cdn.fakercloud.com/avatars/adammarsbar_128.jpg",
+                "price": "$43.86"
+            }
+        ]
+    }
+}
 
 const styles = (theme) => ({
     categoryHeader: {
@@ -49,6 +124,7 @@ const styles = (theme) => ({
 
     },
     itemPrimary: {
+        marginLeft: 5,
         fontSize: 'inherit',
     },
     itemIcon: {
@@ -70,29 +146,102 @@ function Navigator(props) {
     const [olfaN, setOlfaN] = useState(null);
     const [olfaS, setOlfaS] = useState(null);
     const [olfaP, setOlfaP] = useState(null);
+    const [olfa, setOlfa] = useState(null);
     const [uneFois] = useState(true);
 
+    const [isLoading, setIsLoading] = useState();
+    const [value, setValue,] = useState('');
+    const [results, setResults,] = useState();
+    const initialState = () => {
+        setIsLoading(false);
+        setResults([]);
+        setValue('')
+    };
+
     useEffect(() => {
-        axios.get("http://192.168.250.64:8080/selectCat", {params: {name: 'natural'}})
+        axios.get("http://localhost:8080/selectCat", {params: {name: 'natural'}})
             .then((res) => {
                 setOlfaN(res.data);
             }).catch((err) => {
             console.log("ERR : ", err)
         });
-        axios.get("http://192.168.250.64:8080/selectCat", {params: {name: 'synthetic'}})
+        axios.get("http://localhost:8080/selectCat", {params: {name: 'synthetic'}})
             .then((res) => {
                 setOlfaS(res.data);
             }).catch((err) => {
             console.log("ERR : ", err)
         });
-        axios.get("http://192.168.250.64:8080/selectCat", {params: {name: 'perfume'}})
+        axios.get("http://localhost:8080/selectCat", {params: {name: 'perfume'}})
             .then((res) => {
                 setOlfaP(res.data);
             }).catch((err) => {
             console.log("ERR : ", err)
         });
+        axios.get("http://localhost:8080/Olfa")
+            .then((res) => {
+                setOlfa(res.data);
+            }).catch((err) => {
+            console.log("ERR : ", err)
+        });
+
     }, [uneFois]);
 
+
+    const categoryLayoutRenderer = ({categoryContent, resultsContent}) => (
+        <div>
+            <h3 className='name'>{categoryContent}</h3>
+            <div style={{background: 'red'}} className='results'>
+                {resultsContent}
+            </div>
+        </div>
+    )
+
+    categoryLayoutRenderer.propTypes = {
+        categoryContent: PropTypes.node,
+        resultsContent: PropTypes.node,
+    }
+
+    const categoryRenderer = ({name}) => <Label as='span' content={name}/>;
+
+    categoryRenderer.propTypes = {
+        name: PropTypes.string,
+    };
+
+    const resultRenderer = ({title}) => <Label content={title}/>;
+
+    resultRenderer.propTypes = {
+        title: PropTypes.string,
+        description: PropTypes.string,
+    };
+
+
+    const handleResultSelect = (e, {result}) => setValue(result.name)
+
+    const handleSearchChange = (e, {value}) => {
+        setIsLoading(true);
+        setValue(value);
+
+        setTimeout(() => {
+            if (value.length < 1) return initialState;
+
+            const re = new RegExp(_.escapeRegExp(value), 'i')
+            const isMatch = (result) => re.olfa(result[0].name)
+
+            const filteredResults = _.reduce(
+                olfa,
+                (memo, data, name) => {
+                    const results = _.filter(data.results, isMatch)
+                    if (results.length) memo[name] = {name, results} // eslint-disable-line no-param-reassign
+
+                    return memo
+                },
+                {},
+            )
+
+            setIsLoading(false);
+            setResults(filteredResults);
+        }, 300)
+    }
 
 
     return (
@@ -123,11 +272,12 @@ function Navigator(props) {
                             }}
                         />
                     </ListItemText>
+
                 </ListItem>
 
-                <Grid item xs>
+                <Grid1 item xs>
 
-                </Grid>
+                </Grid1>
                 <ListItem button className={classes.categoryHeader} onClick={() => {
                     props.onUpdate(['material', 'natural'])
                 }}>
@@ -151,7 +301,6 @@ function Navigator(props) {
                                     props.onUpdate(['materialName', oN[1]])
                                 }}
                             >
-                                <ListItemIcon className={classes.itemIcon}>x</ListItemIcon>
                                 <ListItemText
                                     classes={{
                                         primary: classes.itemPrimary,
@@ -187,7 +336,6 @@ function Navigator(props) {
                                     props.onUpdate(['materialName', oS[1]])
                                 }}
                             >
-                                <ListItemIcon className={classes.itemIcon}>x</ListItemIcon>
                                 <ListItemText
                                     classes={{
                                         primary: classes.itemPrimary,
@@ -224,7 +372,6 @@ function Navigator(props) {
                                     props.onUpdate([oP[1]])
                                 }}
                             >
-                                <ListItemIcon className={classes.itemIcon}>x</ListItemIcon>
                                 <ListItemText
                                     classes={{
                                         primary: classes.itemPrimary,
@@ -252,7 +399,6 @@ function Navigator(props) {
                     button
                     className={clsx(classes.item)}
                 >
-                    <ListItemIcon className={classes.itemIcon}>x</ListItemIcon>
                     <ListItemText
                         classes={{
                             primary: classes.itemPrimary,
@@ -272,7 +418,6 @@ function Navigator(props) {
                         props.onUpdate(['settings', 'deconnexion'])
                     }}
                 >
-                    <ListItemIcon className={classes.itemIcon}>x</ListItemIcon>
                     <ListItemText
                         classes={{
                             primary: classes.itemPrimary,
@@ -282,10 +427,6 @@ function Navigator(props) {
                     </ListItemText>
                 </ListItem>
                 <Divider className={classes.divider}/>
-                <Router>
-                    <Switch>
-                    </Switch>
-                </Router>
 
 
             </List>
