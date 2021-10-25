@@ -29,6 +29,14 @@ const styles = (theme) => ({
             boxShadow: 'inset 3px 3px 10px #7e888f, inset -3px -3px 10px #ffffff',
         },
     },
+    returnBtn: {
+        cursor: 'pointer',
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    returnBtnTxt: {
+        margin: 2,
+    },
 });
 
 
@@ -74,8 +82,13 @@ function Test(props) {
 
     return(
         <>
+
             <h2 className={classes.titleTest}>{olfa.name === null ? 'Nom matière' : props.olfa.name}</h2>
             <div className={classes.test}>
+                <div className={classes.returnBtn} onClick={props.onClick}>
+                    <img src={'icons/leftArrow.svg'} alt={'left arrow'} width={15}/>
+                    <p className={classes.returnBtnTxt}>Retour</p>
+                </div>
                 <form onSubmit={handleSubmit}>
 
                         <Field nameField={'Nom'} val={testOlfa} onChange={handleChange} nameValue={'name'}/>

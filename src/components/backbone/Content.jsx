@@ -53,12 +53,13 @@ const Content = (props) => {
     const [donneeTestOlfa, setDonneeTestOlfa] = useState({});
     const [testOlfa, setTestOlfa] = useState(null);
     const [settings, setSettings] = useState(null);
+    const [displayLearn, setDisplayLearn] = useState('inline');
 
     useEffect(() => {
         if (props.section !== null) {
 
             if (props.section[0] === 'menu') {
-                setCategori(null);
+                setSettings(null);
             } else if (props.section[0] === 'material') {
                 if (categori === null)
                     setCategori(props.section[1]);
@@ -98,14 +99,14 @@ const Content = (props) => {
     useEffect(() => {
 
         if (categori !== null) {
-            axios.get("http://192.168.250.64:8080/selectCat", {params: {name: categori}})
+            axios.get("http://localhost:8080/selectCat", {params: {name: categori}})
                 .then((res) => {
                     setDonneeTestOlfa(res.data);
                 }).catch((err) => {
                 console.log("ERR : ", err)
             })
         } else {
-            axios.get("http://192.168.250.64:8080/olfa")
+            axios.get("http://localhost:8080/olfa")
                 .then((res) => {
                     setDonneeTestOlfa(res.data);
                 }).catch((err) => {
@@ -192,10 +193,13 @@ const Content = (props) => {
 
                         </Grid>
 
-                        <Grid style={learnSheet !== null ? {display: 'inline'} : {display: 'none'}}>
+                        <Grid style={{display: displayLearn}}>
                             {
                                 learnSheet !== null ?
-                                    <Sheet name={learnSheet} onClick={() => (setTestOlfa(learnSheet))}/> :
+                                    <Sheet name={learnSheet} onClick={() => {
+                                        setTestOlfa(learnSheet);
+                                        setDisplayLearn('none')
+                                    }}/> :
                                     <p></p>
 
                             }
@@ -208,7 +212,11 @@ const Content = (props) => {
                             style={testOlfa !== null && learnSheet !== null ? {display: 'inline'} : {display: 'none'}}>
                             {
                                 testOlfa !== null ?
-                                    <Test olfa={testOlfa}/> :
+
+                                    <Test onClick={() => {
+                                        setDisplayLearn('inline');
+                                        setTestOlfa(null)
+                                    }} olfa={testOlfa}/> :
                                     <p></p>
 
                             }
