@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import {createTheme, ThemeProvider, withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 import Navigator from './Navigator';
 import Content from './Content';
 import Header from './Header';
@@ -12,14 +10,9 @@ import Header from './Header';
 
 function Copyright() {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Olfaction
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
+        <div style={{textAlign: 'center'}}>
+            Copyright © Olfaction {new Date().getFullYear()}.
+        </div>
     );
 }
 
@@ -160,7 +153,7 @@ const styles = {
     },
     footer: {
         padding: theme.spacing(2),
-        background: '#eaeff1',
+        background: '#efefef',
     },
     bubble: {
         marginBottom: 20,
