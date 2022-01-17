@@ -37,6 +37,7 @@ function Tuile(props) {
                                          className='imgTuile'
                                          style={{height: 200}}/>
                                     <h4 className='titleTuile'>{infoOlfa.name}</h4>
+
                                 </div>
                             </div>
                             <div className="flip-card-back" style={{backgroundColor: colorCard}}>
